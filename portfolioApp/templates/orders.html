@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- style -->
+<style>
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 10px;
+    
+}
+</style>
+<!-- style -->
+<section class="px-4">
+<h4 class="py-3"><b>Orders</b></h4>
+<div class="">
+
+
+<div class="d-flex justify-content-between py-3">
+<h5><b>Orders Page</b></h5>
+
+</div>
+
+<div class="col-sm-12 px-0 pb-3 my-3 table-responsive"style="font-size:14px;">
+<table class="table ">
+<thead class="text-secondary">
+<tr>
+<th scope="col">Date</th>
+<th scope="col">User</th>
+<th scope="col">Item</th>
+<th scope="col">Category</th>
+<th scope="col">Order By</th>
+<th scope="col">Supplier</th>
+<th scope="col">Quantity</th>
+<th scope="col">Fee(£)</th>
+<th scope="col">Date</th>
+<th scope="col">Arrived</th>
+<th scope="col">Returned</th>
+<th scope="col">Note</th>
+<th scope="col">Action</th>
+
+
+</tr>
+</thead>
+
+<tbody>
+
+{% for order in order %}
+
+{% if order.Arrived == "Yes" %}
+<tr style="background:#C7FF9B;">
+{% else %}
+<tr style="background:white;">
+{% endif %}
+
+<td>{{order.Date}}</td>
+<td class="text-secondary">{{order.user}}</td>
+<td>{{order.Item}}</td>
+<td>{{order.Category}}</td>
+
+<form method="POST" action="">
+  {% csrf_token %}
+<td>
+  <input type="text" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:50px;" required="required" name="OrderBy"value="{{order.OrderBy}}">
+</td>
+
+<td>
+  <input type="text" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:50px;" required="required" name="Supplier"value="{{order.Supplier}}">
+</td>
+
+<td>
+  <input type="number" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:50px;" required="required" name="Quantity"value="{{order.Quantity}}">
+</td>
+
+<td>
+  <input type="number" id="Fee" step=".01" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:50px;" required="required" name="Fee"value="{{order.Fee}}">
+</td>
+
+<td>
+  <input type="date" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:110px;" required="required" name="NewDate"value="{{order.NewDate|date:"Y-m-d"}}">
+</td>
+
+<td>
+    <select name="Arrived" id="Arrived">
+        <option value="{{order.Arrived}}"selected>{{order.Arrived}}</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+</td>
+
+<td>
+  <select name="Returned" id="Returned">
+      <option value="{{order.Returned}}"selected>{{order.Returned}}</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+  </select>
+</td>
+
+<td>
+  <input type="textarea" class="form-control border-0" style="background:#EBEBEB;padding:3px;font-size:11px;width:50px;" required="required" name="Note"value="{{order.Note}}">
+</td>
+
+<td>
+  <input type="submit" class="btn px-2 py-0" value="Save" style="background:#294C3E;color: white; font-size:11px;" name="Save">
+  <input type="submit" class="btn px-2 py-0" value="Archived" style="background:yellow;font-size:11px;" name="Archive">
+</td>
+
+<input type="hidden" value="{{order.id}}" name="id">
+</form>
+</tr>
+
+
+{% endfor %}
+
+</tbody>
+</table>
+</div>
+
+
+</div>
+
+</section>
+{% endblock body %}
