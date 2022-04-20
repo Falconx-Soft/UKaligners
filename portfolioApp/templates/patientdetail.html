@@ -111,7 +111,37 @@
 </div>
 <!-- Proposed -->
 
+<!-- Dentist -->
+{% if user.is_dentist %}
 
+<div class="row my-3">
+  <h5><b>Upload Proposed Treatment</b></h5>
+         <div class="col-sm-4 my-3">
+          <label for="ProposedTreatment">Treatment Proposed(PDF)</label>
+          {% if proposed.ProposedTreatment.url != None %}
+            <h6 style="margin-top: 35px;"><b class="text-secondary">Proposed treatment(pdf):</b>  <span style="font-size:10px;color:black;"><a class="text-light bg-primary px-2 py-1 rounded"href="{{proposed.ProposedTreatment.url}}" download>Download</a></span></h6>
+          {% endif %}
+        </div>
+  
+      <div class="col-sm-4 my-3">
+        <label for="3DView">Upload 3D View</label>
+        {% if proposed.ThreeDViewProposed.url != None %}
+          <h6 style="margin-top: 35px;"><b class="text-secondary">3D View:</b>  <span style="font-size:10px;color:black;"><a class="text-light bg-primary px-2 py-1 rounded"href="{{proposed.ThreeDViewProposed.url}}" download>Download</a></span></h6>
+        {% endif %}
+  
+      </div>
+  
+      <div class="col-sm-4 my-3">
+        <label for="Invoice">Invoice</label>
+        {% if proposed.Invoice.url != None %}
+          <h6 style="margin-top: 35px;"><b class="text-secondary">Invoice:</b>  <span style="font-size:10px;color:black;"><a class="text-light bg-primary px-2 py-1 rounded"href="{{proposed.Invoice.url}}" download>Download</a></span></h6>
+        {% endif %}
+  
+      </div>
+   
+  </div>
+
+{% endif %}
 <!-- proposed treatment form start -->
 {% if user.is_superuser %}
 <hr class="my-3">
@@ -267,6 +297,36 @@
         {% else %}
           <input style="margin-left: 10px;" type="checkbox" name="Modelstage15" id="UpperArchModelBox">
         {% endif %}
+
+        {% if UpperArchBox.0.stage16 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Modelstage16" id="UpperArchModelBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Modelstage16" id="UpperArchModelBox">
+        {% endif %}
+
+        {% if UpperArchBox.0.stage17 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Modelstage17" id="UpperArchModelBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Modelstage17" id="UpperArchModelBox">
+        {% endif %}
+
+        {% if UpperArchBox.0.stage18 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Modelstage18" id="UpperArchModelBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Modelstage18" id="UpperArchModelBox">
+        {% endif %}
+
+        {% if UpperArchBox.0.stage19 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Modelstage19" id="UpperArchModelBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Modelstage19" id="UpperArchModelBox">
+        {% endif %}
+
+        {% if UpperArchBox.0.stage20 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Modelstage20" id="UpperArchModelBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Modelstage20" id="UpperArchModelBox">
+        {% endif %}
         <input type="hidden" value="{{patient.UpperArch}}" id="UpperArch">
       </div>   
     </div>
@@ -363,6 +423,36 @@
         {% else %}
           <input style="margin-left: 10px;" type="checkbox" name="Alignerstage15" id="UpperArchAlignerBox">
         {% endif %}
+
+        {% if UpperArchBox.1.stage16 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Alignerstage16" id="UpperArchAlignerBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Alignerstage16" id="UpperArchAlignerBox">
+        {% endif %}
+
+        {% if UpperArchBox.1.stage17 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Alignerstage17" id="UpperArchAlignerBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Alignerstage17" id="UpperArchAlignerBox">
+        {% endif %}
+
+        {% if UpperArchBox.1.stage18 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Alignerstage18" id="UpperArchAlignerBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Alignerstage18" id="UpperArchAlignerBox">
+        {% endif %}
+
+        {% if UpperArchBox.1.stage19 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Alignerstage19" id="UpperArchAlignerBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Alignerstage19" id="UpperArchAlignerBox">
+        {% endif %}
+
+        {% if UpperArchBox.1.stage20 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Alignerstage20" id="UpperArchAlignerBox" checked>
+        {% else %}
+          <input style="margin-left: 10px;" type="checkbox" name="Alignerstage20" id="UpperArchAlignerBox">
+        {% endif %}
       </div>   
     </div>
     <!--******************************************************************************************** Ready box -->
@@ -457,6 +547,36 @@
         <input style="margin-left: 10px;" type="checkbox" name="Readystage15" id="UpperArchReadyBox" checked>
         {% else %}
         <input style="margin-left: 10px;" type="checkbox" name="Readystage15" id="UpperArchReadyBox">
+        {% endif %}
+
+        {% if UpperArchBox.2.stage16 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage16" id="UpperArchReadyBox" checked>
+        {% else %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage16" id="UpperArchReadyBox">
+        {% endif %}
+
+        {% if UpperArchBox.2.stage17 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage17" id="UpperArchReadyBox" checked>
+        {% else %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage17" id="UpperArchReadyBox">
+        {% endif %}
+
+        {% if UpperArchBox.2.stage18 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage18" id="UpperArchReadyBox" checked>
+        {% else %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage18" id="UpperArchReadyBox">
+        {% endif %}
+
+        {% if UpperArchBox.2.stage19 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage19" id="UpperArchReadyBox" checked>
+        {% else %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage19" id="UpperArchReadyBox">
+        {% endif %}
+
+        {% if UpperArchBox.2.stage20 == True %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage20" id="UpperArchReadyBox" checked>
+        {% else %}
+        <input style="margin-left: 10px;" type="checkbox" name="Readystage20" id="UpperArchReadyBox">
         {% endif %}
       </div>   
       </div>
@@ -579,6 +699,36 @@
 	  {% else %}
 		<input style="margin-left: 10px;" type="checkbox" name="Modelstage15" id="LowerArchModelBox">
 	  {% endif %}
+    
+    {% if LowerArchBox.0.stage16 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Modelstage16" id="LowerArchModelBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Modelstage16" id="LowerArchModelBox">
+	  {% endif %}
+
+    {% if LowerArchBox.0.stage17 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Modelstage17" id="LowerArchModelBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Modelstage17" id="LowerArchModelBox">
+	  {% endif %}
+
+    {% if LowerArchBox.0.stage18 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Modelstage18" id="LowerArchModelBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Modelstage18" id="LowerArchModelBox">
+	  {% endif %}
+
+    {% if LowerArchBox.0.stage19 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Modelstage19" id="LowerArchModelBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Modelstage19" id="LowerArchModelBox">
+	  {% endif %}
+
+    {% if LowerArchBox.0.stage20 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Modelstage20" id="LowerArchModelBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Modelstage20" id="LowerArchModelBox">
+	  {% endif %}
 	  <input type="hidden" value="{{patient.LowerArch}}" id="LowerArch">
 	</div>   
   </div>
@@ -675,6 +825,36 @@
 	  {% else %}
 		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage15" id="LowerArchAlignerBox">
 	  {% endif %}
+
+    {% if LowerArchBox.1.stage16 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Alignerstage16" id="LowerArchAlignerBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage16" id="LowerArchAlignerBox">
+	  {% endif %}
+
+    {% if LowerArchBox.1.stage17 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Alignerstage17" id="LowerArchAlignerBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage17" id="LowerArchAlignerBox">
+	  {% endif %}
+
+    {% if LowerArchBox.1.stage18 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Alignerstage18" id="LowerArchAlignerBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage18" id="LowerArchAlignerBox">
+	  {% endif %}
+
+    {% if LowerArchBox.1.stage19 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Alignerstage19" id="LowerArchAlignerBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage19" id="LowerArchAlignerBox">
+	  {% endif %}
+
+    {% if LowerArchBox.1.stage20 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Alignerstage20" id="LowerArchAlignerBox" checked>
+	  {% else %}
+		<input style="margin-left: 10px;" type="checkbox" name="Alignerstage20" id="LowerArchAlignerBox">
+	  {% endif %}
 	</div>   
   </div>
   <!--******************************************************************************************** Ready box -->
@@ -769,6 +949,36 @@
 	  <input style="margin-left: 10px;" type="checkbox" name="Readystage15" id="LowerArchReadyBox" checked>
 	  {% else %}
 	  <input style="margin-left: 10px;" type="checkbox" name="Readystage15" id="LowerArchReadyBox">
+	  {% endif %}
+
+    {% if LowerArchBox.2.stage16 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage16" id="LowerArchReadyBox" checked>
+	  {% else %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage16" id="LowerArchReadyBox">
+	  {% endif %}
+
+    {% if LowerArchBox.2.stage17 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage17" id="LowerArchReadyBox" checked>
+	  {% else %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage17" id="LowerArchReadyBox">
+	  {% endif %}
+
+    {% if LowerArchBox.2.stage18 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage18" id="LowerArchReadyBox" checked>
+	  {% else %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage18" id="LowerArchReadyBox">
+	  {% endif %}
+
+    {% if LowerArchBox.2.stage19 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage19" id="LowerArchReadyBox" checked>
+	  {% else %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage19" id="LowerArchReadyBox">
+	  {% endif %}
+
+    {% if LowerArchBox.2.stage20 == True %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage20" id="LowerArchReadyBox" checked>
+	  {% else %}
+	  <input style="margin-left: 10px;" type="checkbox" name="Readystage20" id="LowerArchReadyBox">
 	  {% endif %}
 	</div>   
 	</div>

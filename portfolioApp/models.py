@@ -97,6 +97,11 @@ class UpperArchBox(models.Model):
     stage13 = models.BooleanField(default=False)
     stage14 = models.BooleanField(default=False)
     stage15 = models.BooleanField(default=False)
+    stage16 = models.BooleanField(default=False)
+    stage17 = models.BooleanField(default=False)
+    stage18 = models.BooleanField(default=False)
+    stage19 = models.BooleanField(default=False)
+    stage20 = models.BooleanField(default=False)
 
 class LowerArchBox(models.Model):
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
@@ -116,6 +121,11 @@ class LowerArchBox(models.Model):
     stage13 = models.BooleanField(default=False)
     stage14 = models.BooleanField(default=False)
     stage15 = models.BooleanField(default=False)
+    stage16 = models.BooleanField(default=False)
+    stage17 = models.BooleanField(default=False)
+    stage18 = models.BooleanField(default=False)
+    stage19 = models.BooleanField(default=False)
+    stage20 = models.BooleanField(default=False)
 
 class userType(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
