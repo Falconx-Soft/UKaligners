@@ -83,12 +83,23 @@ WSGI_APPLICATION = 'UKAligners.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': str(BASE_DIR / 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'name': 'defaultdb',
+        'password': 'AVNS_RJ56Xe8n_ANzBkv',
+        'host': 'db-mysql-lon1-87452-do-user-11184497-0.b.db.ondigitalocean.com',
+        'port': '25060',
     }
 }
+
 
 # DATABASES = {
 #     'default': {
