@@ -142,7 +142,7 @@ def patients(request):
             patientObj.save()
 
     if request.user.is_admin:
-        # mypatients=Patient.objects.order_by("PatientName")
+        mypatientsNew=Patient.objects.filter(Progress="New").order_by("-Date")
         mypatientsAccept=Patient.objects.distinct().filter(
             Q(Progress__icontains="Accepted") &
             ~Q(Action="TC")
@@ -163,8 +163,7 @@ def patients(request):
             ~Q(Action="TC")
         ).order_by("PatientName")
     else:
-        # mypatients=Patient.objects.filter(Dentist=request.user).order_by("PatientName")
-
+        mypatientsNew=Patient.objects.filter(Dentist=request.user,Progress="New").order_by("-Date")
         mypatientsAccept = Patient.objects.distinct().filter(
             Q(Dentist=request.user) &
             Q(Progress__icontains="Accepted") &
@@ -188,12 +187,40 @@ def patients(request):
             ~Q(Action="TC")
         ).order_by("PatientName")
 
+        #*************************************************** Chk
+
+        # if request.user.is_superuser or request.user.is_staff:
+        #     mypatients=Patient.objects.filter(Progress="New").order_by("-Date")
+        #     if "Save" in request.POST:
+        #         patientObj = Patient.objects.get(id=request.POST.get('id'))
+        #         if patientObj.Dentist == request.user:
+        #             patientObj.Progress=request.POST.get('Progress')
+        #         patientObj.Status = request.POST.get('Status')
+        #         patientObj.Stage = request.POST.get('Stage')
+        #         patientObj.save()
+        # else:
+        #     mypatients=Patient.objects.filter(Dentist=request.user,Progress="New").order_by("-Date")
+        #     if "Save" in request.POST:
+        #         id=request.POST.get('id')
+        #         editpatient=Patient.objects.get(id=id)
+        #         editpatient.Progress=request.POST.get('Progress')
+        #         editpatient.Treatment=request.POST.get('Treatment')
+        #         editpatient.save()
+        # context={
+        #     'patients':'active',
+        #     'mypatients':mypatients,
+        # }
+
+
+        #*************************************************** Chk
+
     context={
         'patients':'active',
         'mypatientsAccept':mypatientsAccept,
         'mypatientsReview':mypatientsReview,
         'mypatientsDecline':mypatientsDecline,
-        'mypatientsOn_Hold':mypatientsOn_Hold
+        'mypatientsOn_Hold':mypatientsOn_Hold,
+        'mypatientsNew':mypatientsNew
     }
 
     return render(request,'patients.html',context)

@@ -11,7 +11,7 @@ from portfolioApp.models import Income, RepeatIncome, RepeatExpense, Expense
 
 def job():
 	print("HEre")
-	if date.today().day == 5:
+	if date.today().day == 27:
 		ri=RepeatIncome.objects.all()
 		for r in ri:
 			Date=r.Date
@@ -44,10 +44,10 @@ def entries():
 	print("Starting to add data")
 	# schedule.every().day.at("00:18").do(job)
 	schedule.every().day.at("00:00").do(job)
-	schedule.every(1).minutes.do(job)
+	#schedule.every(1).minutes.do(job)
 	while True:
 		schedule.run_pending()
 		time.sleep(1)
 
 print("Hello I am working")
-# entries()
+entries()

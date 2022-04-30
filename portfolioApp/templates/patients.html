@@ -534,6 +534,106 @@
 </table>
 </div>
 
+
+<div class="col-sm-12 px-0 pb-3 my-3 table-responsive"style="font-size:14px;">
+  <h1 style="font-size: 40px; color: rgb(255, 0, 242); margin-bottom: 15px;">New Patients</h1>
+  <table class="table ">
+  <thead class="text-secondary">
+  <tr>
+    <th scope="col">Date</th>
+    <th scope="col">Patient name</th>
+    <th scope="col">Clinic</th>
+    <th scope="col">Prescribe</th>
+    <th scope="col">Agent</th>
+    <th scope="col">Code</th>
+    <th scope="col">Treatment</th>
+    <th scope="col">Progress</th>
+    <th scope="col">Status</th>
+    <th scope="col">Stage</th>
+    <th scope="col">Note</th>
+    <th scope="col">Action</th>
+    <th scope="col">Save</th>
+  </tr>
+  </thead>
+  
+  <tbody>
+  
+  {% for patients in mypatientsNew %}
+  
+  <tr>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <td>{{patients.Date}}</td>
+      {% if not user.is_staff or user.is_superuser %}
+        <td><a href="/patientdetail/{{patients.id}}/">{{patients.PatientName}} {{patients.PatientSurname}}</a></td>
+      {% else %}
+        <td class="text-secondary">{{patients.PatientName}} {{patients.PatientSurname}}</td>
+      {% endif %}
+      <td>{{patients.Clinic}}</td>
+      <td>{{patients.Prescriber}}</td>
+      <td>{{patients.Dentist}}</td>
+      <td><p>Code</p></td>
+      <td style="width: 180px;">{{patients.Treatment}}</td>
+  
+      {% if patients.Dentist == request.user %}
+        <td>
+          <select name="Progress" id="Progress">
+            <option style="background: rgb(52, 143, 255); color: white;" value="{{patients.Progress}}"selected>{{patients.Progress}}</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Review">Review</option>
+            <option value="On-Hold">On-Hold</option>
+            <option value="Declined">Decline</option>
+          </select>
+        </td>
+      {% else %}
+        <td>{{patients.Progress}}</td>
+      {% endif %}
+      
+      {% if user.is_admin %}
+        <td>
+          <select name="Status" id="Status">
+            <option style="background: rgb(52, 143, 255); color: white;" value="{{patients.Status}}"selected>{{patients.Status}}</option>
+            <option value="3D">3D</option>
+            <option value="Ready">Ready</option>
+          </select>
+        </td>
+      {% else %}
+        <td>{{patients.Status}}</td>
+      {% endif %}
+      
+      {% if user.is_admin %}
+        <td>
+          <select name="Stage" id="Stage">
+            <option style="background: rgb(52, 143, 255); color: white;" value="{{patients.Stage}}"selected>{{patients.Stage}}</option>
+            <option value="File sent">File sent</option>
+            <option value="Model prod">Model prod</option>
+            <option value="Aligner prod">Aligner prod</option>
+            <option value="Ready">Ready</option>
+          </select>
+        </td>
+      {% else %}
+        <td>{{patients.Stage}}</td>
+      {% endif %}
+    
+      <td style="width: 180px;">{{patients.Note}}</td>
+      <td>{{patients.Action}}</td>
+      <td>
+        <input type="submit" class="btn px-2 py-0" value="Save" style="background:yellow;font-size:11px;" name="Save">
+      </td>
+      <input type="hidden" name="id" value="{{patients.id}}">
+    </form>
+    
+  </tr>
+  
+  
+  {% endfor %}
+  
+  </tbody>
+  </table>
+  </div>
+
+
+
 </div>
 
 </section>
