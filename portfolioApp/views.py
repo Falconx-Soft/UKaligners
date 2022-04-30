@@ -25,7 +25,6 @@ def dashboard(request):
     if request.user.is_admin:
         #Patients
         totalpatientscount=Patient.objects.distinct().filter(
-            ~Q(Progress="New") &
             ~Q(Action="TC")
             ).count()
         newpatientscount=Patient.objects.filter(Progress="New").count()
@@ -59,7 +58,6 @@ def dashboard(request):
         #Patients
         totalpatientscount=Patient.objects.distinct().filter(
             Q(Dentist=request.user) &
-            ~Q(Progress="New") &
             ~Q(Action="TC")
         ).count()
         newpatientscount=Patient.objects.distinct().filter(
