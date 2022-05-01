@@ -63,7 +63,7 @@ class Patient(models.Model):
     Hint3=models.CharField(max_length=150,null=True)
     DentistNote=models.TextField(default="Not Added",null=True)
     AdminNote=models.TextField(default="Not Added",null=True)
-    Status=models.CharField(max_length=120,default="Pending",null=True,choices=(("3D","3D"),("Ready","Ready")))
+    Status=models.CharField(max_length=120,default="Pending",null=True,choices=(("3D","3D"),("Ready","Ready"),("Waiting Acceptance","Waiting Acceptance")))
     InternalStatus=models.CharField(max_length=30,null=True,default="On")
     Date=models.DateField(auto_now_add=True)
     file=models.FileField(null=True)

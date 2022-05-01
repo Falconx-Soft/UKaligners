@@ -25,9 +25,20 @@ def dashboard(request):
     if request.user.is_admin:
         #Patients
         totalpatientscount=Patient.objects.distinct().filter(
+            ~Q(Progress="New") &
             ~Q(Action="TC")
             ).count()
-        newpatientscount=Patient.objects.filter(Progress="New").count()
+
+        totalpatientscount += Patient.objects.distinct().filter(
+            Q(Progress="New") &
+            Q(Status="Waiting Acceptance") &
+            ~Q(Action="TC")
+            ).count()
+        
+        newpatientscount=Patient.objects.distinct().filter(
+            Q(Progress="New") &
+            ~Q(Status="Waiting Acceptance")
+            ).count()
         acceptedpatientscount=Patient.objects.filter(Status="Accepted").count()
         reviewpatientscount=Patient.objects.filter(Status="Review").count()
         declinedpatientscount=Patient.objects.filter(Status="Declined").count()
@@ -58,11 +69,21 @@ def dashboard(request):
         #Patients
         totalpatientscount=Patient.objects.distinct().filter(
             Q(Dentist=request.user) &
+            ~Q(Progress="New") &
             ~Q(Action="TC")
         ).count()
+
+        totalpatientscount += Patient.objects.distinct().filter(
+            Q(Dentist=request.user) &
+            Q(Progress="New") &
+            Q(Status="Waiting Acceptance") &
+            ~Q(Action="TC")
+            ).count()
+
         newpatientscount=Patient.objects.distinct().filter(
             Q(Dentist=request.user) &
-            Q(Progress="New")
+            Q(Progress="New") &
+            ~Q(Status="Waiting Acceptance")
         ).count()
         acceptedpatientscount=Patient.objects.filter(Dentist=request.user,Status="Accepted").count()
         reviewpatientscount=Patient.objects.filter(Dentist=request.user,Status="Review").count()
@@ -140,7 +161,10 @@ def patients(request):
             patientObj.save()
 
     if request.user.is_admin:
-        mypatientsNew=Patient.objects.filter(Progress="New").order_by("-Date")
+        mypatientsNew=Patient.objects.distinct().filter(
+            Q(Progress="New") &
+            Q(Status="Waiting Acceptance")
+            ).order_by("-Date")
         mypatientsAccept=Patient.objects.distinct().filter(
             Q(Progress__icontains="Accepted") &
             ~Q(Action="TC")
@@ -161,7 +185,7 @@ def patients(request):
             ~Q(Action="TC")
         ).order_by("PatientName")
     else:
-        mypatientsNew=Patient.objects.filter(Dentist=request.user,Progress="New").order_by("-Date")
+        mypatientsNew=Patient.objects.filter(Dentist=request.user,Progress="New",Status="Waiting Acceptance").order_by("-Date")
         mypatientsAccept = Patient.objects.distinct().filter(
             Q(Dentist=request.user) &
             Q(Progress__icontains="Accepted") &
@@ -273,16 +297,24 @@ def patientmp(request):
 @login_required(login_url='login')
 def patientnew(request):
     if request.user.is_superuser or request.user.is_staff:
-        mypatients=Patient.objects.filter(Progress="New").order_by("-Date")
+        mypatients=Patient.objects.distinct().filter(
+            Q(Progress="New") &
+            ~Q(Status="Waiting Acceptance")
+            ).order_by("-Date")
         if "Save" in request.POST:
             patientObj = Patient.objects.get(id=request.POST.get('id'))
             if patientObj.Dentist == request.user:
                 patientObj.Progress=request.POST.get('Progress')
             patientObj.Status = request.POST.get('Status')
+            print("Here")
             patientObj.Stage = request.POST.get('Stage')
             patientObj.save()
     else:
-        mypatients=Patient.objects.filter(Dentist=request.user,Progress="New").order_by("-Date")
+        mypatients=Patient.objects.distinct().filter(
+            Q(Dentist=request.user) &
+            Q(Progress="New") &
+            ~Q(Status="Waiting Acceptance")
+            ).order_by("-Date")
         if "Save" in request.POST:
             id=request.POST.get('id')
             editpatient=Patient.objects.get(id=id)

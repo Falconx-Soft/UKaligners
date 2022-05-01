@@ -90,6 +90,7 @@
           <option style="background: rgb(52, 143, 255); color: white;" value="{{patients.Status}}"selected>{{patients.Status}}</option>
           <option value="3D">3D</option>
           <option value="Ready">Ready</option>
+          <option value="Waiting Acceptance">Waiting Acceptance</option>
         </select>
       </td>
     {% else %}
@@ -110,7 +111,7 @@
       <td>{{patients.Stage}}</td>
     {% endif %}
   
-    <td style="width: 180px;">{{patients.Note}}</td>
+    <td>{{patients.Note}}</td>
     <td>{{patients.Action}}</td>
     <td>
       <input type="submit" class="btn px-2 py-0" value="Save" style="background:yellow;font-size:11px;" name="Save">
